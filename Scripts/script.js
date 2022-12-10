@@ -1,8 +1,8 @@
 
 
-
-// saves stored data when save button is pushed.
+// function to ready jquery before loading
 $(document).ready(function () {
+  // saves stored data when save button is pushed.
   const saveButton = $('button');
   saveButton.on('click', function () {
     var content = $(this).siblings('.description').val();
@@ -17,7 +17,7 @@ $(document).ready(function () {
   function displayinfo() {
 
     for (i = 9; i <= 20; i++) {
-      $(`${i} .description`).val(localStorage.getItem(`${i}`));
+      $('#'+`${i} .description`).val(localStorage.getItem(`${i}`));
     }
   }
   displayinfo();
@@ -47,7 +47,7 @@ $(document).ready(function () {
   }
 
 ColorChnge();
- 
+ // displays current date
   const dateDiv = $('#currentDay')
   const date = dayjs().format('dddd MMMM D, YYYY')
   dateDiv.append(date)
