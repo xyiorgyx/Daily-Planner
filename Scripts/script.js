@@ -14,25 +14,40 @@ $(document).ready(function () {
   });
 
   // function displays all stored data when refreshed
-  function displayinfo () {
+  function displayinfo() {
 
-    for (i = 1; i <= 12; i++) {
-      $(`#hour-${i} .description`).val(localStorage.getItem(`hour-${i}`));
+    for (i = 9; i <= 20; i++) {
+      $(`${i} .description`).val(localStorage.getItem(`${i}`));
     }
   }
   displayinfo();
-  //
-  // / TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  console.log(dayjs())
+
+
+  // will change color of the text area based on the time
+  function ColorChnge() {
+
+    for (i = 9; i <= 20; i++) {
+      var boxHour = $(this).attr(`${i}`);
+      var newBoxHour = $(boxHour).attr('id');
+      var boxHourInt = parseInt(newBoxHour);
+      var currentHour = dayjs().hour();
+      console.log(boxHour)
+      console.log(currentHour)
+      console.log('Id Value:' + boxHourInt)
+      if (boxHourInt < currentHour) {
+        $(boxHour).addClass('past');
+      }
+      else if (boxHourInt == currentHour) {
+        $(boxHour).addClass('present');
+      }
+      else {
+        $(boxHour).addClass('future');
+      }
+    }
+  }
+
+ColorChnge();
+ 
   const dateDiv = $('#currentDay')
   const date = dayjs().format('dddd MMMM D, YYYY')
   dateDiv.append(date)
